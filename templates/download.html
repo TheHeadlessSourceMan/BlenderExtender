@@ -1,0 +1,19 @@
+$(template_name="Generate Download HTML")
+$(sources="blend","obj","3ds")
+$(generate=100,100,"png",image100)
+<html>
+<head>
+<style type="text/css"><!--
+	.item {display:block;border:raised #888888}
+	.thumbnail {border:0}
+	.download_area {margin-left:2cm}
+	.download_title {display:block;width:100%;font-weight:bold;font-size:200%;border-bottom:3px black solid}
+--></style>
+</head>
+<body>
+<span class="download_title">Downloads ($(count)):</span>
+<span class="download_area">
+$(foreach=<a class="item" href="$(source)"><img style="thumbnail" src="$(imgage100)", width="100", height="100" /><br />$(source)</a>)
+</span>
+</body>
+</html>

@@ -1,0 +1,36 @@
+// BlenderExtender.idl : IDL source for BlenderExtender
+//
+
+// This file will be processed by the MIDL tool to
+// produce the type library (BlenderExtender.tlb) and marshalling code.
+
+import "oaidl.idl";
+import "ocidl.idl";
+
+[
+	object,
+	uuid(575D1DBB-037C-4EA4-BF77-312224A7995A),
+	dual,
+	nonextensible,
+	helpstring("IBlenderShellExtension Interface"),
+	pointer_default(unique)
+]
+interface IBlenderShellExtension : IDispatch{
+};
+[
+	uuid(D05ABC6B-0113-4238-930B-3F71C0D5A6EF),
+	version(1.0),
+	helpstring("BlenderExtender 1.0 Type Library")
+]
+library BlenderExtenderLib
+{
+	importlib("stdole2.tlb");
+	[
+		uuid(AE7B2720-60D0-48FC-958A-7CAD029A7CF5),
+		helpstring("BlenderShellExtension Class")
+	]
+	coclass BlenderShellExtension
+	{
+		[default] interface IBlenderShellExtension;
+	};
+};

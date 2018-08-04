@@ -1,0 +1,6 @@
+; BlenderExtender.def : Declares the module parameters for the DLL.
+
+LIBRARY      "BlenderExtender"
+
+EXPORTS
+    ; Explicit exports can go here

@@ -1,0 +1,12 @@
+BlenderExtender.ncb
+BlenderExtender.suo
+blender scripts
+*.pyc
+test
+test1
+debug
+release
+Debug
+Release
+*.aps
+*.lnk

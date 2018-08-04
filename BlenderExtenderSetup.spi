@@ -1,0 +1,125 @@
+[Project Name]
+Blender Extender
+
+[Install To]
+<Program Files>\Blender Foundation\Blender
+
+[ProgramVersion]
+1.0
+
+[Final Install]
+C:\volitile\coding\BlenderExtender\BlenderExtenderSetup.exe
+
+[Install Bitmap]
+C:\volitile\coding\BlenderExtender\installer_logo.bmp
+
+[Install License]
+
+
+[Message]
+To install this program you will need Blender 2.48 or later and python 2.5 full install.  They can be found at:\nhttp://www.blender.org\nhttp://sourceforge.net/projects/pywin32/\n\nDo you have both of these things installed?
+QuestionYesNo
+
+[CopyFile]
+ToSet
+C:\Program Files\Blender Foundation\Blender\.blender\scripts\k_center.py
+
+[CopyFile]
+ToSet
+C:\Program Files\Blender Foundation\Blender\.blender\scripts\k_commonEvent.py
+
+[CopyFile]
+ToSet
+C:\Program Files\Blender Foundation\Blender\.blender\scripts\k_openThis.py
+
+[CopyFile]
+ToSet
+C:\Program Files\Blender Foundation\Blender\.blender\scripts\k_renderThis.py
+
+[CopyFile]
+ToSet
+C:\Program Files\Blender Foundation\Blender\.blender\scripts\k_runner.py
+
+[CopyFile]
+ToSet
+C:\Program Files\Blender Foundation\Blender\.blender\scripts\k_settings.py
+
+[CopyFile]
+ToSet
+C:\Program Files\Blender Foundation\Blender\Blender Extender\template.py
+
+[CopyFile]
+ToSet
+C:\Program Files\Blender Foundation\Blender\Blender Extender\Readme.htm
+
+[CopyFile]
+ToSet
+C:\Program Files\Blender Foundation\Blender\Blender Extender\monkey_100.png
+
+[CopyFile]
+ToSet
+C:\Program Files\Blender Foundation\Blender\Blender Extender\ExtensionManager.py
+
+[CopyFile]
+ToSet
+C:\Program Files\Blender Foundation\Blender\Blender Extender\coolExamples.htm
+
+[CopyFile]
+ToSet
+C:\Program Files\Blender Foundation\Blender\Blender Extender\BlenderExtender.dll
+
+[CopyFile]
+ToSet
+C:\Program Files\Blender Foundation\Blender\.blender\scripts\inout\blender_standard.py
+
+[CopyFile]
+ToSet
+C:\Program Files\Blender Foundation\Blender\.blender\scripts\inout\imagemagick.py
+
+[CopyFile]
+ToSet
+C:\Program Files\Blender Foundation\Blender\.blender\scripts\inout\vtk.py
+
+[CopyFile]
+ToSet
+C:\Program Files\Blender Foundation\Blender\Blender Extender\renders\README.txt
+
+[CopyFile]
+ToSet
+C:\Program Files\Blender Foundation\Blender\Blender Extender\templates\download.html
+
+[CopyFile]
+ToSet
+C:\Program Files\Blender Foundation\Blender\Blender Extender\templates\gallery.php
+
+[CopyFile]
+ToSet
+C:\Program Files\Blender Foundation\Blender\Blender Extender\templates\gallery.html
+
+[CopyFile]
+ToSet
+C:\Program Files\Blender Foundation\Blender\Blender Extender\settings.ini
+
+[CreateIcon]
+pythonw.exe
+<Start Programs>\Blender Foundation\Extension Manager
+"<Destination>\Blender Extender\ExtensionManager.py"
+
+[CreateIcon]
+C:\Program Files\Blender Foundation\Blender\Blender Extender\Readme.htm
+<Start Programs>\Blender Foundation\README
+
+
+[CreateIcon]
+C:\Program Files\Blender Foundation\Blender\Blender Extender\coolExamples.htm
+<Start Programs>\Blender Foundation\Cool Examples
+
+
+[RunFile]
+pythonw.exe
+"<Destination>/Blender Extender/ExtensionManager.py"
+
+[RunAndWaitFile]
+regsvr32
+/s "<Destination>\Blender Extender\BlenderExtender.dll"
+

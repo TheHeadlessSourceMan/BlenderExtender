@@ -1,0 +1,94 @@
+<?xml version="1.0" ?><!DOCTYPE html  PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN'  'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'><html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>BlenderExtender</title>
+<style type="text/css">
+	.filename {font-weight:bold}
+	subproject {display:list-item}
+	python, .python {display:none}
+	h2 {font-size:150%;font-weight:bold;border-bottom:1px solid black;width:100%}
+	.expanded:before {color:green;content:'\25BC';font-size:10px;width:21px;cursor:pointer;border:3px outset #99ff99;background:#99ff99}
+	description {display:block}
+	.childarea {margin-left:7px;padding-left:7px;border-left:3px ridge #99ff99;padding-top:0px}
+	h1, name {display:block;font-size:200%;font-weight:bold;border-bottom:2px solid black;width:100%}
+	.indent {display:block;margin-right:1.5cm;margin-left:1.5cm}
+	.shrunken:before {color:green;content:'\25BA';font-size:10px;width:21px;cursor:pointer;border:3px outset #99ff99;background:#99ff99}
+</style>
+<script language="JavaScript" type="text/javascript">
+function showHide(node,shouldShow) {
+	var show=null;
+	var twirlie=node.childNodes[0]
+	if(twirlie.getAttribute('class')=='expanded'&amp;&amp;(shouldShow==null||shouldShow==0)) {
+		show=0;
+		twirlie.setAttribute('class','shrunken');
+	} else if(twirlie.getAttribute('class')=='shrunken'&amp;&amp;(shouldShow==null||shouldShow==1)) {
+		show=1;
+		twirlie.setAttribute('class','expanded');
+	}
+	if(show!=null) {
+		var i;
+		for(i=2;i&lt;node.childNodes.length;i++) {
+			var e=node.childNodes[i];
+			if(e.nodeType!=1) {
+				// Do nothing. Only interested in elements.
+			} else if(show) {
+				e.setAttribute('style',e.getAttribute('oldStyle'));
+			} else {
+				e.setAttribute('oldStyle',e.getAttribute('style'));
+				e.setAttribute('style','display:none');
+			}
+		}
+	}
+}
+</script></head>
+<body class="indent">
+<projects type="parent"><project file="../project.xhtml"><a href="../project.xhtml" style="font-weight:bold">volitile</a></project></projects>
+<name>BlenderExtender</name>
+<description>This is a Blender+python shell extension that allows your folders to display thumbnails of 3d files.  It also allows for other cool things like "click to open" and command line rendering of supported 3d files.  
+</description><div><h2>Tools:</h2><tools class="indent"><div><select id="toolSelect" onchange="toolSelectChange()" style="width:50%"/><select id="operationSelect" onchange="operationSelectChange()" style="width:50%"/></div><div id="toolSettingsBox" style="border:thin outset #aaaaaa;background:#aaaaaa">File(s): <input id="filename" value="*.cpp;*.h"/><span onclick="this.previousSibling.value=this.previousSibling.defaultValue" style="border:thin outset #aaaaaa;color:#666666;cursor:pointer">*.*</span></div><input onclick="toolRun()" style="display:block;margin-left:auto;margin-right:auto;width:150px" type="button" value="run"/></tools></div>
+<h2>Subprojects:</h2><div class="indent"><projects type="sub"/></div><h2>Files:</h2><files class="indent" style="display:block"><span class="expanded" onclick="showHide(this.parentNode)"></span>(ALL)<div class="childarea"><div><span class="expanded" onclick="showHide(this.parentNode)"></span>BlenderExtender<div class="childarea"><file filename="BlenderExtender/BlenderExtender.cpp"><span class="filename">BlenderExtender/BlenderExtender.cpp</span><br/>
+</file><file filename="BlenderExtender/BlenderExtender.def"><span class="filename">BlenderExtender/BlenderExtender.def</span><br/>
+</file><file filename="BlenderExtender/BlenderExtender.h"><span class="filename">BlenderExtender/BlenderExtender.h</span><br/>
+</file><file filename="BlenderExtender/BlenderExtender.idl"><span class="filename">BlenderExtender/BlenderExtender.idl</span><br/>
+</file><file filename="BlenderExtender/BlenderExtender.rc"><span class="filename">BlenderExtender/BlenderExtender.rc</span><br/>
+</file><file filename="BlenderExtender/BlenderExtender.rgs"><span class="filename">BlenderExtender/BlenderExtender.rgs</span><br/>
+</file><file filename="BlenderExtender/BlenderExtenderps.def"><span class="filename">BlenderExtender/BlenderExtenderps.def</span><br/>
+</file><file filename="BlenderExtender/BlenderExtenderps.mk"><span class="filename">BlenderExtender/BlenderExtenderps.mk</span><br/>
+</file><file filename="BlenderExtender/BlenderExtender_i.c"><span class="filename">BlenderExtender/BlenderExtender_i.c</span><br/>
+</file><file filename="BlenderExtender/BlenderExtender_i.h"><span class="filename">BlenderExtender/BlenderExtender_i.h</span><br/>
+</file><file filename="BlenderExtender/BlenderExtender_p.c"><span class="filename">BlenderExtender/BlenderExtender_p.c</span><br/>
+</file><file filename="BlenderExtender/BlenderShellExtension.cpp"><span class="filename">BlenderExtender/BlenderShellExtension.cpp</span><br/>
+</file><file filename="BlenderExtender/BlenderShellExtension.h"><span class="filename">BlenderExtender/BlenderShellExtension.h</span><br/>
+</file><file filename="BlenderExtender/BlenderShellExtension.rgs"><span class="filename">BlenderExtender/BlenderShellExtension.rgs</span><br/>
+</file><file filename="BlenderExtender/dlldata.c"><span class="filename">BlenderExtender/dlldata.c</span><br/>
+</file><file filename="BlenderExtender/monkey.xcf"><span class="filename">BlenderExtender/monkey.xcf</span><br/>
+</file><file filename="BlenderExtender/monkey_100.bmp"><a class="filename" href="BlenderExtender/monkey_100.bmp">BlenderExtender/monkey_100.bmp</a><br/>
+</file><file filename="BlenderExtender/ReadMe.txt"><a class="filename" href="BlenderExtender/ReadMe.txt">BlenderExtender/ReadMe.txt</a><br/>
+</file><file filename="BlenderExtender/resource.h"><span class="filename">BlenderExtender/resource.h</span><br/>
+</file><file filename="BlenderExtender/stdafx.cpp"><span class="filename">BlenderExtender/stdafx.cpp</span><br/>
+</file><file filename="BlenderExtender/stdafx.h"><span class="filename">BlenderExtender/stdafx.h</span><br/>
+</file></div></div><file filename="BlenderExtender.sln"><span class="filename">BlenderExtender.sln</span><br/>
+</file><file filename="BlenderExtenderSetup.spi"><span class="filename">BlenderExtenderSetup.spi</span><br/>
+</file><file filename="coolExamples.htm"><a class="filename" href="coolExamples.htm">coolExamples.htm</a><br/>
+</file><file filename="ExtensionManager.py"><span class="filename">ExtensionManager.py</span> -- ------------------- Windows registry tools<br/>
+</file><div><span class="expanded" onclick="showHide(this.parentNode)"></span>inout<div class="childarea"><file filename="inout/blender_standard.py"><span class="filename">inout/blender_standard.py</span><br/>
+</file><file filename="inout/imagemagick.py"><span class="filename">inout/imagemagick.py</span><br/>
+</file><file filename="inout/vtk.py"><span class="filename">inout/vtk.py</span><br/>
+</file></div></div><file filename="installer_logo.bmp"><a class="filename" href="installer_logo.bmp">installer_logo.bmp</a><br/>
+</file><file filename="installer_logo.xcf"><span class="filename">installer_logo.xcf</span><br/>
+</file><file filename="k_center.py"><span class="filename">k_center.py</span> -- pydoc__ =<br/>
+</file><file filename="k_commonEvent.py"><span class="filename">k_commonEvent.py</span> -- This file provides a way to do commonly needed events<br/>
+</file><file filename="k_importExport.py"><span class="filename">k_importExport.py</span> -- Create default lists<br/>
+</file><file filename="k_openThis.py"><span class="filename">k_openThis.py</span> -- pydoc__ =<br/>
+</file><file filename="k_renderThis.py"><span class="filename">k_renderThis.py</span> -- pydoc__ =<br/>
+</file><file filename="k_settings.py"><span class="filename">k_settings.py</span><br/>
+</file><file filename="manual install.bat"><span class="filename">manual install.bat</span><br/>
+</file><file filename="monkey_100.png"><a class="filename" href="monkey_100.png">monkey_100.png</a><br/>
+</file><file filename="project.xhtml"><a class="filename" href="project.xhtml">project.xhtml</a><br/>
+</file><file filename="Readme.htm"><a class="filename" href="Readme.htm">Readme.htm</a><br/>
+</file><file filename="settings.ini"><span class="filename">settings.ini</span><br/>
+</file><file filename="template.py"><span class="filename">template.py</span><br/>
+</file><div><span class="expanded" onclick="showHide(this.parentNode)"></span>templates<div class="childarea"><file filename="templates/download.html"><a class="filename" href="templates/download.html">templates/download.html</a><br/>
+</file><file filename="templates/gallery.html"><a class="filename" href="templates/gallery.html">templates/gallery.html</a><br/>
+</file><file filename="templates/gallery.php"><span class="filename">templates/gallery.php</span><br/>
+</file></div></div></div></files></body>
+</html>

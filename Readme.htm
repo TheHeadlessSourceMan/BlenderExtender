@@ -1,0 +1,244 @@
+<html>
+<head>
+<style type="text/css"><!--
+	h1 {display:block;width:100%;font-weight:bold;font-size:200%;border-bottom:3px black solid}
+	h2 {display:block;font-weight:bold;font-size:150%;margin-bottom:0px}
+	body {background-color:white;margin-left:1cm;margin-right:1cm}
+	li {margin-left:1.5cm}
+	.indent {margin-left:1.5cm}
+	td {background-color:white}
+	table {background-color:#777777}
+--></style>
+</head>
+<body>
+
+<h1>Overview:</h1>
+<div class="indent">
+BlenderExtender is a tool for using Blender to automatically generate thumbnails for the Windows file explorer. The need is, like 2D images, you can sometimes find the file you're looking for faster if you can see what its contents are.<br />
+<br />
+<h2>Requirements:</h2>
+<li>Blender (duh).</li>
+<li>Python 2.5 full install.</li>
+<li>More Blender plugins to import other data types. (Optional.  See "Extending", below.)</li>
+<br />
+<h2>This system consists of:</h2>
+<li>An ExtensionManager.py app that lets you change settings of which files are given to Blender to render and what Blender's render settings should be.</li>
+<li>A windows "shell extension" that feeds the file explorer whatever thumbnails it needs.</li>
+<li>A render tool that can start a hidden Blender app and render a thumbnail.</li>
+<li>A complimentary Blender script to manage that rendering.</li>
+<li>A tool to add a context menu to folders such that we can automatically generate a template. (For instance, auto-generate a "download" webpage with thumbnails for all Blender content)</li>
+</div>
+
+<h1>Settings</h1>
+All the settings for these applications are held in common and are taken in the preferred order (high to low):
+<li>Stored inside active blender file.</li>
+<li>Passed in on the command line.</li>
+<li>Stored in settings.ini.</li>
+<li>Best guess.</li>
+There are many, many things that can be specified, including:
+<div class="indent">
+frame=[First,Middle,Last,Current] (untested)<br />
+osa=[specified,0,5,8,11,16]<br />
+ao=[specified,on,off] (TODO)<br />
+gi=[specified,on,off] (TODO)<br />
+w=[specified,#]<br />
+h=[specified,#]<br />
+out=[filename]<br />
+listTypes<br />
+filename=[filename] (this can also be an unnamed input, but this syntax is recommended for all but .blend files)<br />
+</div>
+If you want to take some common action on an event, do:
+<div class="indent">
+onRenderSuccess=[common_event(s)]<br />
+onRenderFail=[common_event(s)]<br />
+onRenderDone=[common_event(s)]<br />
+</div>
+Example:
+<div class="indent">
+--onRenderSuccess=close --onRenderSuccess=hibernate --onRenderFail="email://gmail.com:user:passwd:myself@gmail.com,myself@gmail.com:OOPS!:Your render of $(filename) died."
+</div>
+These other ones are irrelevent outside of the .ini file:
+<div class="indent">
+shellex=[uuid of Blender shell extention]
+blender=[location_of_blender]
+renderThis=[location_of_script]
+openThis=[location_of_script]
+outdir=[location_for_output]
+icon=[icon_file]
+</div>
+
+<h1>Troubleshooting:</h1><div class="indent">
+<h2>FAQ:</h2>
+<li><b>I get an error that it can't find the blender.exe, even though it says the right path.</b><br />This is probably because you are running with a cygwin python.  This is lame and not supported.  Install the real win32 python instead.</li>
+</div>
+
+<h1>ExtensionManager.py:</h1>
+<div class="indent">
+This utility will give you a menu list of available extensions and what their settings are.  This was written in Python because Python is already requierd to run the thing, plus it makes dynamic menus much easier.<br />
+<h2>It will look roughly like:</h2>
+<table class="indent">
+<tr><td><b>File Extension</b></td><td><b>Generate Thumbnail</b></td><td><b>Open with Blender</b></td><td><b>Full Name</b></td></tr>
+<tr><td>.blend</td><td>X</td><td>X</td><td>blender 3d scene</td></tr>
+<tr><td>.ts3</td><td>X</td><td></td><td>truespace 3d scene</td></tr>
+<tr><td>.obj</td><td>X</td><td>X</td><td>alias 3d object</td></tr>
+<tr><td>.jpg</td><td></td><td></td><td>jpeg image</td></tr>
+<tr><td>.exr</td><td>X</td><td></td><td>openexr high dynamic range image</td></tr>
+</table>
+<br />
+This will manage the windows registry as needed, but be warned: This is non-warranty code meddling with your system settings!  BACKUP THE REGISTRY OFTEN!!!
+</div>
+
+<h1>Shell Extension:</h1>
+<div class="indent">
+The shell extension uses the render tool to render images for all thumbnails that are out-of-date.<br />
+<br />
+<h2>It will also:</h2>
+<li>Show a "dead monkey" image for anything that was not renderable. This image is customizable.</li>
+</div>
+
+<h1>Render Tool:</h1>
+<div class="indent">
+Renders a given file with the Blender command line in conjunction with a python script that changes the render settings once the file is open.<br />
+<br />
+For info on the Blender command line see:<br />
+<a href="http://wiki.blender.org/index.php/Doc:Manual/Render/Command_Line_Options">http://wiki.blender.org/index.php/Doc:Manual/Render/Command_Line_Options</a><br />
+<br />
+See: http://www.blender.org/documentation/246PythonDoc/Registry-module.html<br />
+</div>
+
+<h1>Blender Rendering Script:</h1>
+<div class="indent">
+Though minimal support exists for causing Blender to render via the command line, we need more control than that. Instead, we will start Blender normally and send in extra parameters to our render managment script.
+</div>
+
+<h1>Templates:</h1>
+<div class="indent">
+This is a simple, yet powerful python template-based file generating system.  It can also register those templates as file context menus.
+
+<h2>Registering a Context Menu:</h2><div class="indent">
+To register a template simply run:<br />
+<b>python template.py --register --template=[your template]</b><br />
+If your template is in the templates directory then it's even easier.  Just say:<br />
+<b>python template.py --register</b><br />
+You can now right-click on any kind of file(s) that the template supports and let 'er rip!
+</div>
+
+<h2>Manually Running a Template:</h2>
+<div class="indent">
+If you're testing a problematic template or using a specialty template as part of a larger project, you may want to run your template manually.  Fortunately, it's quite easy:
+<b>python template.py --template=[your template] [files_and_directories]</b><br />
+</div>
+
+<h2>Writing Your Own:</h2>
+<div class="indent">
+The template files generally all live in the "templates" directory immediately under your BlenderExtender install location.<br />
+<br />
+The template format is just the file you want output, plus...<br />
+<br />
+There are settings MUST BE at the very top that specify how the template is to be registered and used:<br /><div class="indent">
+$(template_name="Generate Something") -- file browser menu name<br />
+$(sources="blend","obj","3ds") -- acceptable types of input files<br />
+$(generate=100,100,"png","png_100x100_image") -- generated output [width,height,type,name to refer to result as].  You can have more than one.<br />
+</div>
+<br />
+There are some values that are good everywhere:<br /><div class="indent">
+$(count) -- the number of files processed<br />
+$(foreach=...) -- a loop of template code added once for each of the input items processed<br />
+$(file=file_name) -- start writing to a new output file.  Notice that if you're outputting stuff and you haven't specified an output file, it's just the name of this template file.<br />
+</div>
+<br />
+These are good only inside the foreach:<br /><div class="indent">
+$(source) -- the source file name<br />
+$(...) -- one of the names you specified in a $(generate=...), for example if you added the generate above, you could then use $(png_100x100_image)<br />
+</div>
+<br />
+Note that since all template things are like $() that you could possibly mess things up with your template.  Some examples:<br />
+<div class="indent"><b>
+$(foreach=I am happy :)-) -- fail<br />
+$(foreach=<!--(-->I am happy :)-) -- pass<br />
+<br />
+$(foreach=You owe $4.50) -- pass<br />
+$(foreach=You owe $(US)4.50) -- fail<br />
+<br />
+$(foreach=hi) -- pass<br />
+$( foreach=hi) -- fail<br />
+<br />
+$(foreach=$(image)) -- pass<br />
+$(foreach=$(image) -- fail<br />
+<br />
+$(foreach=<br />
+	hello, this is an image<br />
+	$(image)<br />
+) -- pass<br />
+$(foreach=<br />
+	hello, this is an image<br />
+	$(image<br />
+) -- fail<br />
+</b></div>
+</div>
+</div>
+
+<h1>Extending:</h1>
+<div class="indent">
+Extending for new file types is easy and requires only minimal Python knowledge.  Here's how...
+<br />
+TODO: Write this.
+</div>
+
+<h1>Programming Notes:</h1>
+<li>This program is intended to be installed with <a href="http://sourceforge.net/projects/spoon-installer/">spoon installer</a>.  To create the install, run "manual install.bat" to get all the assets in the correct place and then fire up the ".spi" file in spoon.</li>
+<li>If you build and register the shell extension, then rebuild, VisualStudio won't be able to save the .dll -- cuz explorer is still using it.  One way around this is to open the task manager and kill explorer.exe as you build.  Then when you're done you can restart it in task manager by going File->Run and typing "explorer".  Kindof a pain, but it works.</li>
+<li>For info on writing a completely new non-Blender windows thumbnail shell extension, see:<br />
+<a href="http://www.codeproject.com/KB/shell/thumbextract.aspx">http://www.codeproject.com/KB/shell/thumbextract.aspx</a></li>
+<li>This extension was only implemented for thumbnail view, which is a great way to keep directory browsing nice and fast.  However, if you wish to extend this add support for custom icons as well, check out:<br />
+<a href="http://www.codeproject.com/KB/shell/shellextguide9.aspx">http://www.codeproject.com/KB/shell/shellextguide9.aspx</a></li>
+</div>
+
+<h1>Status:</h1>
+<div class="indent">
+<h2>Done:</h2>
+<li>windows shell extension</li>
+<li>render script</li>
+<li>settings system</li>
+<li>template system</li>
+<li>generic event system (for like things to call when render is done)</li>
+<li>transparent render</li>
+<li>a generic way to load file types from the command line</li>
+<li>settings.ini can contain info on managing extensions (undo history, etc)</li>
+<li>extension manager ui is successfully managing extensions</li>
+<li>"failed" image customizable</li>
+<li>rudimentary "run hidden" functionality</li>
+
+<h2>In Progress:</h2>
+<li>shell extension is re-rendering every time</li>
+<li>extension manager is not presently working</li>
+<li>extension manager should autodetect what types "Open" can open</li>
+
+<h2>Next Items:</h2>
+<li>save per-file settings inside the .blend file as metadata</li>
+<li>Create a saver tool on par with the universal loader.</li>
+<li>template system is not generating any output</li>
+<li>setup a default scene for loading/rendering images</li>
+<li>write up some examples on how to do stuff</li>
+<li>Devise a way of re-using Blender instance to eliminate app startup times. (this will probably require intercommunicating with the spawned program vis stdin/stdout)</li>
+<li>obsoletes the plugins k_uberLoadImg and k_uberLoadModel and stuff in k_lib like "BLENDER_LOAD_MODELS". These need to be gone through and revamped.</li>
+
+<h2>Eventually, Maybe:</h2>
+<li>opener for PIL python library</li>
+<li>opener for ImageMagick python library</li>
+<li>opener for VTK python library</li>
+<li>opener for OpnCV python library</li>
+<li>opener for Processing python library</li>
+<li>figure out which standard blender importers are being stoopid and fix them -OR- ...</li>
+<li>Blender is supposedly coming out with a smarter import/export scheme.  When they do, change over to that.</li>
+<li>Show a "progress" thumbnail for anything that is busy rendering.</li>
+<li>bust out some math and figure out how to auto-recenter an scene and hide the ground plane</li>
+<li>implement flag --ao=[specified,on,off]</li>
+<li>implement flag --gi=[specified,on,off]</li>
+<li>implement the maths to re-center the camera on an object</li>
+<li>extension manager ui should manage filetype icons and descriptions</li>
+<li>when using the "script to open itsself" model, we should not be sending the .ini settings on the command line</li>
+</div>
+
+</body>
+</html>

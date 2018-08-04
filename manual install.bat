@@ -1,0 +1,16 @@
+del inout\*.pyc
+mkdir "c:\Program Files\Blender Foundation\Blender\.blender\scripts\inout"
+copy k_*.py "c:\Program Files\Blender Foundation\Blender\.blender\scripts"
+copy inout\* "c:\Program Files\Blender Foundation\Blender\.blender\scripts\inout"
+
+mkdir "c:\Program Files\Blender Foundation\Blender\Blender Extender"
+mkdir "c:\Program Files\Blender Foundation\Blender\Blender Extender\renders"
+mkdir "c:\Program Files\Blender Foundation\Blender\Blender Extender\templates"
+copy /Y ExtensionManager.py "c:\Program Files\Blender Foundation\Blender\Blender Extender"
+copy /Y template.py "c:\Program Files\Blender Foundation\Blender\Blender Extender"
+copy /Y monkey_100.png "c:\Program Files\Blender Foundation\Blender\Blender Extender"
+copy /Y *.htm "c:\Program Files\Blender Foundation\Blender\Blender Extender"
+copy /Y settings.ini "c:\Program Files\Blender Foundation\Blender\Blender Extender"
+copy /Y debug\*.dll "c:\Program Files\Blender Foundation\Blender\Blender Extender"
+copy /Y templates\* "c:\Program Files\Blender Foundation\Blender\Blender Extender\templates"
+copy /Y renders\README.txt "c:\Program Files\Blender Foundation\Blender\Blender Extender\renders"

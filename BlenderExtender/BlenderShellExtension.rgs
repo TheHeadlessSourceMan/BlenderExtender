@@ -1,0 +1,27 @@
+HKCR
+{
+	BlenderExtender.BlenderShellExtension.1 = s 'BlenderShellExtension Class'
+	{
+		CLSID = s '{AE7B2720-60D0-48FC-958A-7CAD029A7CF5}'
+	}
+	BlenderExtender.BlenderShellExtension = s 'BlenderShellExtension Class'
+	{
+		CLSID = s '{AE7B2720-60D0-48FC-958A-7CAD029A7CF5}'
+		CurVer = s 'BlenderExtender.BlenderShellExtension.1'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {AE7B2720-60D0-48FC-958A-7CAD029A7CF5} = s 'BlenderShellExtension Class'
+		{
+			ProgID = s 'BlenderExtender.BlenderShellExtension.1'
+			VersionIndependentProgID = s 'BlenderExtender.BlenderShellExtension'
+			ForceRemove 'Programmable'
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'Apartment'
+			}
+			val AppID = s '%APPID%'
+			'TypeLib' = s '{D05ABC6B-0113-4238-930B-3F71C0D5A6EF}'
+		}
+	}
+}
